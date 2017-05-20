@@ -12,7 +12,13 @@ var index = require('./routes/index');
 var api = require('./routes/api');
 var authenticate = require('./routes/authenticate')(passport);
 var mongoose = require('mongoose');                         //add for Mongo support
-mongoose.connect('mongodb://localhost/test-chirp');              //connect to Mongo
+
+if(process.env.DEV_ENV){
+    mongoose.connect('mongodb://localhost/test-chirp');              //connect to Mongo
+} else
+{
+    mongoose.connect('mongodb://kurozato.candy:1Latrice@ds064299.mlab.com:64299/chirp');
+}
 var app = express();
 
 // view engine setup
